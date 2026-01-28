@@ -3,32 +3,37 @@
 **Focus:** Internal documentation, emails to stakeholders, and release notes.
 
 ## 🧱 Best Practices
-1.  **Load Context First:** Before asking for a draft, upload `context/brand_voice.md` or `context/project_specs.md`.
-2.  **Define the Audience:** Explicitly state if this is for "Technical Developers" (details okay) or "Executive Stakeholders" (high-level only).
+1.  **Load Context First:** Upload `context/project_specs.md` (Auto Insights Modernization) before drafting.
+2.  **Define the Audience:**
+    * **Executive:** Conor, Gordon (Focus on ROI, Speed, Security).
+    * **Technical:** Jeremy, Dev Team (Focus on S3 Structure, Dependencies).
 
 ## 📋 Prompt Catalog
 
-### 1. The "Stakeholder Update"
-**Use when:** Explaining technical delays or wins to non-technical leadership (e.g., Conor/Gordon).
-> "Draft a weekly update email based on the bullet points below.
-> Tone: Professional, concise, solution-oriented.
-> Audience: Non-technical executive stakeholders.
+### 1. The "Technical Brief Generator"
+**Use when:** Preparing the requirements document for Jeremy.
+> "Draft a Technical Brief for [Project Name].
 >
-> Key Points:
-> - [Insert Achievement, e.g., S3 Bucket setup complete]
-> - [Insert Blocker, e.g., Waiting on API access]
-> - [Insert Next Step]"
-
-### 2. The "Readme Generator"
-**Use when:** You've written a script but haven't documented it.
-> "Write a `README.md` for the following Python script.
-> Include:
-> - 'Prerequisites' section (libraries used).
-> - 'Usage' section with a command line example.
-> - A brief explanation of what the script does.
+> **Context:**
+> - Goal: Modernize data pipeline to S3/Parquet.
+> - Current Pain Point: 80% of time spent on maintenance/loading.
+> - Deliverable: A finalized `pipeline_modernization.md` spec.
 >
-> [Paste Code Here]"
+> **Structure the Brief with:**
+> 1. Problem Statement.
+> 2. Proposed Architecture (Diagram description).
+> 3. Definition of Success (Speed < 10 mins).
+> 4. Questions for the Technical Lead."
 
-### 3. The "Technical Spec Polish"
-**Use when:** Your rough notes need to become a formal Jira ticket or design doc.
-> "Rewrite these rough notes into a structured Technical Specification. Use the following headers: 'Objective', 'Technical Approach', 'Risks', and 'Definition of Done'."
+### 2. The "Stakeholder Buy-In Pitch"
+**Use when:** Emailing Conor and Gordon to approve the new architecture.
+> "Draft an update email for Executive Stakeholders.
+> **Key Message:** We are switching to a 'Data Lake' model to reduce reporting time by 90%.
+> **Tone:** Confident, strategic, high-level.
+> **Ask:** Approval to proceed with Phase 1 (Infrastructure Setup).
+>
+> Highlight that this satisfies the Annual Goal regarding 'Scalable Platforms'."
+
+### 3. The "Readme Generator"
+**Use when:** Documenting new scripts (e.g., `parquet_pipeline.py`).
+> "Write a `README.md` for the following Python script. Include prerequisites (libraries) and usage examples."
