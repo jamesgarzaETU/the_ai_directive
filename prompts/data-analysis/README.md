@@ -2,40 +2,33 @@
 
 **Focus:** SQL generation, Pandas transformations, and Plotly visualization logic.
 
-## 🛑 SAFETY WARNING
-**NEVER PASTE REAL CUSTOMER DATA (PII) INTO THE CHAT.**
-* **Do:** Paste column headers (schema) or fake sample rows.
-* **Don't:** Paste user emails, IDs, or raw financial logs.
-
-## 🧱 Best Practices
-1.  **Schema First:** Always provide the `CREATE TABLE` statement or the output of `df.info()` so the AI understands the data structure.
-2.  **Specify the Dialect:** PostgreSQL syntax differs from MySQL. Be specific.
+## 🛑 SAFETY & PERFORMANCE WARNING
+1.  **NO PII:** Never paste real customer names/emails.
+2.  **NO DIRECT DB HITS:** The goal is to move analysis to S3. **Do not generate code that queries the production MySQL DB for analytics.** Always query the local Parquet files.
 
 ## 📋 Prompt Catalog
 
-### 1. The "Complex SQL Builder"
-**Use when:** You need a complex join or window function.
-> "Write a MySQL query to calculate the [Metric, e.g., Monthly Retention Rate].
->
-> Table Schema:
-> - users (id, signup_date)
-> - activity_log (user_id, timestamp, action_type)
->
-> Requirements:
-> - Group by month.
-> - Filter out 'admin' users.
-> - Use a CTE for readability."
-
-### 2. The "Plotly Dashboard Helper"
-**Use when:** Converting D3.js or static charts to Python Plotly (for the Modernization project).
+### 1. The "Plotly Modernizer"
+**Use when:** Converting old D3.js or Static Images to interactive Plotly charts.
 > "Write a Python function using `plotly.graph_objects` to visualize this dataframe.
 >
-> Dataframe columns: `[date, usage_count, user_segment]`
-> Visualization type: Stacked Bar Chart.
-> Style: Minimalist, white background.
+> **Requirements:**
+> - Input: Pandas DataFrame (from Parquet).
+> - Style: Minimalist, White Background (match Brand CSS).
+> - Interactivity: Enable hover states for detailed metrics.
+> - **Output:** A standalone HTML component or JSON for the dashboard.
 >
-> Ensure the layout is responsive."
+> [Describe the Chart Needed]"
+
+### 2. The "Parquet Optimizer"
+**Use when:** Determining how to save data efficiently.
+> "Suggest the best partitioning strategy for this dataset in Parquet format.
+>
+> **Columns:** `[date, user_id, simulation_id, score]`
+> **Query Pattern:** We usually filter by `simulation_id` and then `date`.
+>
+> Tell me how to structure the `partition_cols` argument in `pyarrow`."
 
 ### 3. The "Regex Extractor"
-**Use when:** Cleaning messy string data in Pandas.
-> "Write a Python Regex pattern to extract the transaction ID (format: 'TXN-1234') from the following raw log strings. Then show me how to apply it to a Pandas column named `raw_logs`."
+**Use when:** Cleaning messy log strings in Pandas.
+> "Write a Python Regex pattern to extract specific IDs from raw logs."
